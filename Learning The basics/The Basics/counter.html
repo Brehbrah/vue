@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="script/vue.js"></script>
+    <script src="script/counter.js" defer></script>
+</head>
+<body>
+
+    <div id="app">
+        <button v-on:click="increase(2, $event)">Click Me!</button>
+        <button v-on:click="counter++">Click Me!</button>
+
+        <p>{{ counter * 2 > 10 ? 'greater than 10' : 'smaller than 10' }}</p>
+        
+        <p v-on:mousemove="updateCoordinates">
+            Coordinates: {{ x }}/{{ y }}
+            - <span v-on:mousemove.stop="">DEAD SPOT</span>
+        </p>
+        <input type="text" v-on:keyup.enter.space ="alertMe">
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="../script/vue.js"></script>
+    <script src="script/v-for.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+        <!-- 
+            v-for is like for-loop
+            Inside the v-for loop, the (ingredient) is the variable, and {{ ingredient }} is selecting the variable which is inside the v-for loop
+            'ingredients' is the array of the data property
+        -->
+        <ul>
+            <!-- 
+                using the v-bind:key="" will make sure to store the position of the element itself.
+                If you ever need to reorder them or something like that, it will take the actual element and not just override the values in some of the positions
+             -->
+            <li v-for="(ingredient, i) in ingredients" v-bind:key="ingredient">{{ ingredient }} [{{ i }}]</li>
+        </ul> 
+        <button @click="ingredients.push('spices')">Add New </button>
+        <hr>
+        <ul>
+            <li v-for="(person) in persons">
+                <!-- Looping through properties of an object by the key-value pairs -->
+                <!-- <div v-for="(value) in (person)">{{ key }}: {{ value }} [{{ index }}] </div> -->
+                <div v-for="(value, key, index) in (person)">{{ key }}: {{ value }} [{{ index }}] </div>
+            </li>
+        </ul>
+        <!-- Looping through range of the numbers -->
+        <span v-for="n in 10">{{ n }}</span>
+        <hr>
+        <!-- Alternative for v-for syntax -->
+        <template v-for="(ingredient, index) in ingredients">
+            <h1>{{ ingredient }}</h1>
+            <p>{{ index }}</p>
+        </template>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../script/vue.js"></script>
+    <script src="script/v-if.js" defer></script>
+</head>
+<body>
+    <div id="app">
+        <p v-if="show">You Can See me <span>Hello!</span></p>
+        
+        <p v-else>Now You See MEeeEEe!!</p>
+        <!-- 
+            Using the template-element makes we can group all of the elements
+            Inside the template-element. It's like if(condition) {// group the code inside}
+            (Optional) div instead of template
+        -->
+        <template v-if="show">
+            <h1>Heading</h1>
+            <p>Inside a template</p>
+        </template>
+        <!-- Using the v-show is like style="display: block" or "style="display: none" -->
+        <p v-show="show">Do you also see me?</p>
+        
+        <button @click="show = !show">Switch</button>
+    </div>
+</body>
+</html>

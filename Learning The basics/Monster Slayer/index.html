@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Monster Slayer</title>
+  <script src="https://npmcdn.com/vue/dist/vue.js"></script>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="css/foundation.min.css" />
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+
+<body>
+  <div id="app">
+    <section class="row">
+      <div class="small-6 columns">
+        <h1 class="text-center">THE HERO</h1>
+        <h2 class="text-center hero"></h2>
+        <transition name="shake">
+          <img v-bind:src="playerImg" id="shake-dmg" alt="Cool player">
+        </transition>
+        <div class="healthbar">
+          <div class="healthbar text-center" v-bind:style="healthBar">{{ playerHealth }} HP</div>
+        </div>
+        <div class="text-center" v-if="attack" v-wait> The Player says: "{{atkDisplay()}}" </div>
+        <div class="text-center" v-else-if="heal">The Player says: "{{ healDisplay() }}"</div>
+      </div>
+      <div class="small-6 columns">
+        <h1 class="text-center">THE MONSTER</h1>
+        <h2 class="text-center"></h2>
+        <img v-bind:src="monsterImg" id="shake-dmg" alt="Bad Monster">
+        <div class="healthbar">
+          <div class="healthbar text-center" v-bind:style="healthBar">{{ monsterHealth }} HP</div>
+        </div>
+        <div class="text-center" v-if="attack"> The Monster says: "{{atkDisplay()}}" </div>
+        <div class="text-center" v-else-if="heal">The Monster says: "{{ healDisplay() }}"</div>
+
+      </div>
+    </section>
+    <section class="row controls" v-if="!newGame">
+      <div class="small-12 columns">
+        <button id="start-game" @click="[newGame = !newGame, startGame()]">START NEW GAME</button>
+      </div>
+    </section>
+    <section class="row controls" v-else>
+      <div class="small-12 columns"></div>
+      <template>
+        <button id="attack" v-on:click="attack">ATTACK</button>
+        <button id="special-attack" @click="specialAttack">SPECIAL ATTACK</button>
+        <button id="heal" @click="heal">HEAL</button>
+        <button id="give-up" @click="restart">RESTART</button>
+        <button id="give-up" @click="giveUp">GIVE UP</button>
+      </template>
+      <template else-if="monsterTurn">
+      </template>
+    </section>
+    <section class="row log" v-if="logs.length > 0">
+      <div class="small-12 columns">
+        <h2>Log</h2>
+        <ul>
+          <li v-if="attack" v-for="(logRound, i) in logs"
+            v-bind:class="{'player-turn': logRound.isPlayer,'monster-turn': logRound.isMonster}">
+            {{ logRound.playerTxt }} <br>
+            {{ logRound.monsterTxt }}
+            [{{i}}]
+          </li>
+          <li></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+  </div>
+</body>
+
+</html>
